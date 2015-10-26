@@ -23,7 +23,9 @@ Install
 Run on HTTP:
 -----------
 
-    node app.js -p 3000
+    node app.js -p 8070
+
+    sudo passwd awsuser  # reset(-f) the password of awsuser
 
 If you run it as root it will launch `/bin/login` (where you can specify
 the user name), else it will launch `ssh` and connect by default to
@@ -35,7 +37,7 @@ SSH user using the `--sshuser` option.
 
 You can also specify the SSH user name in the address bar like this:
 
-  `http://yourserver:3000/wetty/ssh/<username>`
+  `http://yourserver:8070/wetty/ssh/<username>`
 
 Run on HTTPS:
 ------------
@@ -47,7 +49,7 @@ create a self signed certificate using this command:
 
 And then run:
 
-    node app.js --sslkey key.pem --sslcert cert.pem -p 3000
+    node app.js --sslkey key.pem --sslcert cert.pem -p 8070
 
 Again, if you run it as root it will launch `/bin/login`, else it will
 launch SSH to `localhost` or a specified host as explained above.
@@ -58,7 +60,7 @@ Run wetty behind nginx:
 Put the following configuration in nginx's conf:
 
     location /wetty {
-	    proxy_pass http://127.0.0.1:3000/wetty;
+	    proxy_pass http://127.0.0.1:8070/wetty;
 	    proxy_http_version 1.1;
 	    proxy_set_header Upgrade $http_upgrade;
 	    proxy_set_header Connection "upgrade";
@@ -89,7 +91,7 @@ whatever you want!
 Just do:
 
 ```
-    docker run --name term -p 3000 -dt nathanleclaire/wetty
+    docker run --name term -p 8070 -dt nathanleclaire/wetty
 ```
 
 Visit the appropriate URL in your browser (`[localhost|$(boot2docker ip)]:PORT`).  
@@ -106,6 +108,6 @@ Install wetty globally with -g option:
     $ sudo start wetty
 ```
 
-This will start wetty on port 3000. If you want to change the port or redirect stdout/stderr you should change the last line in `wetty.conf` file, something like this:
+This will start wetty on port 8070. If you want to change the port or redirect stdout/stderr you should change the last line in `wetty.conf` file, something like this:
 
     exec sudo -u root wetty -p 80 >> /var/log/wetty.log 2>&1
