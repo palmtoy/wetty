@@ -23,7 +23,7 @@ Install
 Run on HTTP:
 -----------
 
-    node app.js -p 8070
+    sudo node app.js -p 8070
 
     sudo passwd awsuser  # reset(-f) the password of awsuser
 
@@ -49,7 +49,7 @@ create a self signed certificate using this command:
 
 And then run:
 
-    node app.js --sslkey key.pem --sslcert cert.pem -p 8070
+    sudo node app.js --sslkey ./ssh/key.pem --sslcert ./ssh/cert.pem -p 8070
 
 Again, if you run it as root it will launch `/bin/login`, else it will
 launch SSH to `localhost` or a specified host as explained above.
