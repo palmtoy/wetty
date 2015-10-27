@@ -1,3 +1,10 @@
+// `pkill node` or `kill PID` or `sudo pkill node` cann't make me EXIT.
+// BUT, `kill -9 PID` can make me EXIT.
+process.on('SIGTERM', function() {
+	console.log('Got a TERM(KILL) signal, but still running ~', Date());
+	console.log('================================================');
+});
+
 var express = require('express');
 var http = require('http');
 var https = require('https');
